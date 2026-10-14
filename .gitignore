@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Production build artifacts (heavy binaries)
+build/
+dist/
+
+# Intermediate compiler files
+launcher.res
+*.log
+.system_generated/

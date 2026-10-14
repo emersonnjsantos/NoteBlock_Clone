@@ -1,0 +1,46 @@
+{
+  "name": "windows-notepad-clone",
+  "version": "1.0.0",
+  "description": "Clone fidedigno do Bloco de Notas do Windows (Windows Notepad) baseado em engenharia reversa do notepad.exe",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "web": "node server.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win nsis portable"
+  },
+  "build": {
+    "appId": "com.windows.notepad.clone",
+    "productName": "Bloco de Notas",
+    "copyright": "Microsoft® Windows® Notepad Recreation",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "notepad_icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Bloco de Notas"
+    }
+  },
+  "keywords": [
+    "notepad",
+    "windows",
+    "editor",
+    "reverse-engineering"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^44.7.2",
+    "electron-builder": "^26.15.3"
+  }
+}

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>*Sem título - Bloco de Notas</title>
+  <link rel="icon" type="image/png" href="notepad_icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app-window" class="app-window">
+    <!-- Titlebar -->
+    <header class="titlebar" id="titlebar">
+      <div class="titlebar-left">
+        <img src="notepad_icon.png" alt="Notepad Icon" class="app-icon" id="app-icon">
+        <span class="window-title" id="window-title">Sem título - Bloco de Notas</span>
+      </div>
+
+      <div class="titlebar-center">
+        <!-- Tab bar (Windows 11 style) -->
+        <div class="tabs-container" id="tabs-container">
+          <div class="tab-item active" data-tab-id="1">
+            <span class="tab-title" id="active-tab-title">Sem título</span>
+            <button class="tab-close-btn" title="Fechar guia (Ctrl+W)" id="tab-close-btn">&times;</button>
+          </div>
+          <button class="new-tab-btn" id="new-tab-btn" title="Nova guia (Ctrl+T)">+</button>
+        </div>
+      </div>
+
+      <div class="titlebar-right">
+        <!-- Quick Actions -->
+        <button class="titlebar-btn theme-toggle-btn" id="theme-toggle-btn" title="Alternar Tema Claro / Escuro">
+          <svg class="theme-icon light-icon" viewBox="0 0 24 24" width="16" height="16">
+            <circle cx="12" cy="12" r="5" fill="currentColor"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg class="theme-icon dark-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+          </svg>
+        </button>
+
+        <button class="titlebar-btn lang-toggle-btn" id="lang-toggle-btn" title="Alternar Idioma (pt-BR / en-US)">
+          <span id="current-lang-label">PT</span>
+        </button>
+
+        <!-- Window Controls -->
+        <button class="titlebar-btn window-control-btn minimize-btn" id="minimize-btn" title="Minimizar">
+          <svg viewBox="0 0 12 12" width="10" height="10">
+            <rect y="5" width="10" height="1" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="titlebar-btn window-control-btn maximize-btn" id="maximize-btn" title="Maximizar">
+          <svg viewBox="0 0 12 12" width="10" height="10">
+            <rect x="1" y="1" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1"/>
+          </svg>
+        </button>
+        <button class="titlebar-btn window-control-btn close-btn" id="close-btn" title="Fechar (Alt+F4)">
+          <svg viewBox="0 0 12 12" width="10" height="10">
+            <path d="M2 2 L10 10 M10 2 L2 10" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Menu Bar -->
+    <nav class="menubar" id="menubar">
+      <!-- File Menu -->
+      <div class="menu-item" id="menu-file">
+        <button class="menu-trigger" data-menu="file" accesskey="a">
+          <span class="underline">A</span>rquivo
+        </button>
+        <div class="dropdown-menu" id="dropdown-file">
+          <div class="menu-row" data-action="new-file">
+            <span class="menu-label">Novo</span>
+            <span class="menu-shortcut">Ctrl+N</span>
+          </div>
+          <div class="menu-row" data-action="new-window">
+            <span class="menu-label">Nova Janela</span>
+            <span class="menu-shortcut">Ctrl+Shift+N</span>
+          </div>
+          <div class="menu-row" data-action="open-file">
+            <span class="menu-label">Abrir...</span>
+            <span class="menu-shortcut">Ctrl+O</span>
+          </div>
+          <div class="menu-row" data-action="save-file">
+            <span class="menu-label">Salvar</span>
+            <span class="menu-shortcut">Ctrl+S</span>
+          </div>
+          <div class="menu-row" data-action="save-as-file">
+            <span class="menu-label">Salvar Como...</span>
+            <span class="menu-shortcut">Ctrl+Shift+S</span>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-row" data-action="page-setup">
+            <span class="menu-label">Configurar Página...</span>
+            <span class="menu-shortcut"></span>
+          </div>
+          <div class="menu-row" data-action="print-file">
+            <span class="menu-label">Imprimir...</span>
+            <span class="menu-shortcut">Ctrl+P</span>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-row" data-action="exit-app">
+            <span class="menu-label">Sair</span>
+            <span class="menu-shortcut">Alt+F4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Menu -->
+      <div class="menu-item" id="menu-edit">
+        <button class="menu-trigger" data-menu="edit" accesskey="e">
+          <span class="underline">E</span>ditar
+        </button>
+        <div class="dropdown-menu" id="dropdown-edit">
+          <div class="menu-row" data-action="undo" id="menu-undo">
+            <span class="menu-label">Desfazer</span>
+            <span class="menu-shortcut">Ctrl+Z</span>
+          </div>
+          <div class="menu-row" data-action="redo" id="menu-redo">
+            <span class="menu-label">Refazer</span>
+            <span class="menu-shortcut">Ctrl+Y</span>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-row" data-action="cut" id="menu-cut">
+            <span class="menu-label">Recortar</span>
+            <span class="menu-shortcut">Ctrl+X</span>
+          </div>
+          <div class="menu-row" data-action="copy" id="menu-copy">
+            <span class="menu-label">Copiar</span>
+            <span class="menu-shortcut">Ctrl+C</span>
+          </div>
+          <div class="menu-row" data-action="paste" id="menu-paste">
+            <span class="menu-label">Colar</span>
+            <span class="menu-shortcut">Ctrl+V</span>
+          </div>
+          <div class="menu-row" data-action="delete" id="menu-delete">
+            <span class="menu-label">Excluir</span>
+            <span class="menu-shortcut">Del</span>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-row" data-action="bing-search">
+            <span class="menu-label">Buscar com o Bing...</span>
+            <span class="menu-shortcut">Ctrl+E</span>
+          </div>
+          <div class="menu-row" data-action="find">
+            <span class="menu-label">Localizar...</span>
+            <span class="menu-shortcut">Ctrl+F</span>
+          </div>
+          <div class="menu-row" data-action="find-next">
+            <span class="menu-label">Localizar próxima</span>
+            <span class="menu-shortcut">F3</span>
+          </div>
+          <div class="menu-row" data-action="find-prev">
+            <span class="menu-label">Localizar anterior</span>
+            <span class="menu-shortcut">Shift+F3</span>
+          </div>
+          <div class="menu-row" data-action="replace">
+            <span class="menu-label">Substituir...</span>
+            <span class="menu-shortcut">Ctrl+H</span>
+          </div>
+          <div class="menu-row" data-action="goto">
+            <span class="menu-label">Ir para...</span>
+            <span class="menu-shortcut">Ctrl+G</span>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-row" data-action="select-all">
+            <span class="menu-label">Selecionar tudo</span>
+            <span class="menu-shortcut">Ctrl+A</span>
+          </div>
+          <div class="menu-row" data-action="time-date">
+            <span class="menu-label">Hora/data</span>
+            <span class="menu-shortcut">F5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Format Menu -->
+      <div class="menu-item" id="menu-format">
+        <button class="menu-trigger" data-menu="format" accesskey="f">
+          <span class="underline">F</span>ormatar
+        </button>
+        <div class="dropdown-menu" id="dropdown-format">
+          <div class="menu-row has-check" data-action="toggle-wordwrap" id="menu-wordwrap">
+            <span class="menu-checkmark">✓</span>
+            <span class="menu-label">Quebra automática de linha</span>
+            <span class="menu-shortcut"></span>
+          </div>
+          <div class="menu-row" data-action="open-font-dialog">
+            <span class="menu-label">Fonte...</span>
+            <span class="menu-shortcut"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- View Menu -->
+      <div class="menu-item" id="menu-view">
+        <button class="menu-trigger" data-menu="view" accesskey="x">
+          E<span class="underline">x</span>ibir
+        </button>
+        <div class="dropdown-menu" id="dropdown-view">
+          <div class="menu-row has-submenu" id="menu-zoom-parent">
+            <span class="menu-label">Zoom</span>
+            <span class="menu-arrow">▶</span>
+            <div class="dropdown-submenu" id="dropdown-zoom">
+              <div class="menu-row" data-action="zoom-in">
+                <span class="menu-label">Ampliar</span>
+                <span class="menu-shortcut">Ctrl + +</span>
+              </div>
+              <div class="menu-row" data-action="zoom-out">
+                <span class="menu-label">Reduzir</span>
+                <span class="menu-shortcut">Ctrl + -</span>
+              </div>
+              <div class="menu-row" data-action="zoom-reset">
+                <span class="menu-label">Restaurar Zoom Padrão</span>
+                <span class="menu-shortcut">Ctrl+0</span>
+              </div>
+            </div>
+          </div>
+          <div class="menu-row has-check checked" data-action="toggle-statusbar" id="menu-statusbar">
+            <span class="menu-checkmark">✓</span>
+            <span class="menu-label">Barra de status</span>
+            <span class="menu-shortcut"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Help Menu -->
+      <div class="menu-item" id="menu-help">
+        <button class="menu-trigger" data-menu="help" accesskey="j">
+          A<span class="underline">j</span>uda
+        </button>
+        <div class="dropdown-menu" id="dropdown-help">
+          <div class="menu-row" data-action="help-view">
+            <span class="menu-label">Exibir Ajuda</span>
+            <span class="menu-shortcut"></span>
+          </div>
+          <div class="menu-row" data-action="help-feedback">
+            <span class="menu-label">Enviar Comentários</span>
+            <span class="menu-shortcut"></span>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-row" data-action="help-about">
+            <span class="menu-label">Sobre o Bloco de notas</span>
+            <span class="menu-shortcut"></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Editor Main Area -->
+    <main class="editor-container" id="editor-container">
+      <textarea id="text-editor" class="text-editor word-wrap" spellcheck="false" placeholder=""></textarea>
+    </main>
+
+    <!-- Status Bar -->
+    <footer class="statusbar" id="statusbar">
+      <div class="status-section status-pos" id="status-pos">Lin 1, Col 1</div>
+      <div class="status-section status-chars" id="status-chars">0 caracteres</div>
+      <div class="status-section status-zoom" id="status-zoom">100%</div>
+      <div class="status-section status-eol" id="status-eol" title="Clique para alternar CRLF / LF">Windows (CRLF)</div>
+      <div class="status-section status-enc" id="status-enc" title="Codificação de texto">UTF-8</div>
+    </footer>
+  </div>
+
+  <!-- Hidden File Input for Open File -->
+  <input type="file" id="file-input" style="display: none;" accept=".txt,.log,.ini,.json,.js,.html,.css,.md,*">
+
+  <!-- ==================== MODALS & DIALOGS ==================== -->
+
+  <!-- 1. Find Dialog (Localizar) -->
+  <div class="dialog-overlay" id="dialog-find" style="display: none;">
+    <div class="dialog-box win-dialog">
+      <div class="dialog-header">
+        <span class="dialog-title">Localizar</span>
+        <button class="dialog-close-btn" data-close-dialog="dialog-find">&times;</button>
+      </div>
+      <div class="dialog-body find-dialog-body">
+        <div class="form-row">
+          <label for="find-input">Localizar:</label>
+          <input type="text" id="find-input" class="win-input" autofocus>
+        </div>
+        <div class="find-options-container">
+          <div class="find-left-options">
+            <label class="win-checkbox">
+              <input type="checkbox" id="find-match-case">
+              <span>Diferenciar maiúsculas de minúsculas</span>
+            </label>
+            <label class="win-checkbox">
+              <input type="checkbox" id="find-wrap-around" checked>
+              <span>Ao redor (wrap around)</span>
+            </label>
+          </div>
+          <div class="find-direction-group">
+            <fieldset class="win-fieldset">
+              <legend>Direção</legend>
+              <label class="win-radio">
+                <input type="radio" name="find-dir" value="up">
+                <span>Acima</span>
+              </label>
+              <label class="win-radio">
+                <input type="radio" name="find-dir" value="down" checked>
+                <span>Abaixo</span>
+              </label>
+            </fieldset>
+          </div>
+        </div>
+        <div class="dialog-actions-vertical">
+          <button class="win-btn primary-btn" id="find-next-btn">Localizar Próxima</button>
+          <button class="win-btn" data-close-dialog="dialog-find">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Replace Dialog (Substituir) -->
+  <div class="dialog-overlay" id="dialog-replace" style="display: none;">
+    <div class="dialog-box win-dialog">
+      <div class="dialog-header">
+        <span class="dialog-title">Substituir</span>
+        <button class="dialog-close-btn" data-close-dialog="dialog-replace">&times;</button>
+      </div>
+      <div class="dialog-body replace-dialog-body">
+        <div class="form-row">
+          <label for="replace-find-input">Localizar:</label>
+          <input type="text" id="replace-find-input" class="win-input">
+        </div>
+        <div class="form-row">
+          <label for="replace-with-input">Substituir por:</label>
+          <input type="text" id="replace-with-input" class="win-input">
+        </div>
+        <div class="find-options-container">
+          <label class="win-checkbox">
+            <input type="checkbox" id="replace-match-case">
+            <span>Diferenciar maiúsculas de minúsculas</span>
+          </label>
+          <label class="win-checkbox">
+            <input type="checkbox" id="replace-wrap-around" checked>
+            <span>Ao redor</span>
+          </label>
+        </div>
+        <div class="dialog-actions-vertical">
+          <button class="win-btn primary-btn" id="replace-find-next-btn">Localizar Próxima</button>
+          <button class="win-btn" id="replace-one-btn">Substituir</button>
+          <button class="win-btn" id="replace-all-btn">Substituir Tudo</button>
+          <button class="win-btn" data-close-dialog="dialog-replace">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Go To Line Dialog (Ir para...) -->
+  <div class="dialog-overlay" id="dialog-goto" style="display: none;">
+    <div class="dialog-box win-dialog" style="width: 320px;">
+      <div class="dialog-header">
+        <span class="dialog-title">Ir para linha</span>
+        <button class="dialog-close-btn" data-close-dialog="dialog-goto">&times;</button>
+      </div>
+      <div class="dialog-body">
+        <label for="goto-line-input">Número da linha:</label>
+        <input type="number" id="goto-line-input" class="win-input" min="1" value="1" style="width: 100%; margin-top: 6px; margin-bottom: 16px;">
+        <div class="dialog-actions-horizontal">
+          <button class="win-btn primary-btn" id="goto-confirm-btn">Ir para</button>
+          <button class="win-btn" data-close-dialog="dialog-goto">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Font Dialog (Fonte...) -->
+  <div class="dialog-overlay" id="dialog-font" style="display: none;">
+    <div class="dialog-box win-dialog font-dialog-box">
+      <div class="dialog-header">
+        <span class="dialog-title">Fonte</span>
+        <button class="dialog-close-btn" data-close-dialog="dialog-font">&times;</button>
+      </div>
+      <div class="dialog-body font-dialog-body">
+        <div class="font-selectors-row">
+          <!-- Family -->
+          <div class="font-col">
+            <label>Fonte:</label>
+            <input type="text" id="font-family-input" class="win-input" readonly value="Consolas">
+            <div class="win-listbox" id="font-family-list">
+              <div class="list-item selected" data-value="Consolas">Consolas</div>
+              <div class="list-item" data-value="Lucida Console">Lucida Console</div>
+              <div class="list-item" data-value="Cascadia Code">Cascadia Code</div>
+              <div class="list-item" data-value="Segoe UI">Segoe UI</div>
+              <div class="list-item" data-value="Courier New">Courier New</div>
+              <div class="list-item" data-value="Arial">Arial</div>
+              <div class="list-item" data-value="Times New Roman">Times New Roman</div>
+              <div class="list-item" data-value="Fira Code">Fira Code</div>
+            </div>
+          </div>
+
+          <!-- Style -->
+          <div class="font-col">
+            <label>Estilo de fonte:</label>
+            <input type="text" id="font-style-input" class="win-input" readonly value="Normal">
+            <div class="win-listbox" id="font-style-list">
+              <div class="list-item selected" data-value="normal">Normal</div>
+              <div class="list-item" data-value="italic">Itálico</div>
+              <div class="list-item" data-value="bold">Negrito</div>
+              <div class="list-item" data-value="bold-italic">Negrito Itálico</div>
+            </div>
+          </div>
+
+          <!-- Size -->
+          <div class="font-col" style="flex: 0 0 70px;">
+            <label>Tamanho:</label>
+            <input type="text" id="font-size-input" class="win-input" readonly value="11">
+            <div class="win-listbox" id="font-size-list">
+              <div class="list-item" data-value="8">8</div>
+              <div class="list-item" data-value="9">9</div>
+              <div class="list-item" data-value="10">10</div>
+              <div class="list-item selected" data-value="11">11</div>
+              <div class="list-item" data-value="12">12</div>
+              <div class="list-item" data-value="14">14</div>
+              <div class="list-item" data-value="16">16</div>
+              <div class="list-item" data-value="18">18</div>
+              <div class="list-item" data-value="20">20</div>
+              <div class="list-item" data-value="24">24</div>
+              <div class="list-item" data-value="28">28</div>
+              <div class="list-item" data-value="36">36</div>
+              <div class="list-item" data-value="48">48</div>
+              <div class="list-item" data-value="72">72</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample preview -->
+        <fieldset class="win-fieldset font-sample-group">
+          <legend>Exemplo</legend>
+          <div class="font-sample-preview" id="font-sample-preview">AaBbYyZz 123</div>
+        </fieldset>
+
+        <div class="dialog-actions-horizontal">
+          <button class="win-btn primary-btn" id="font-ok-btn">OK</button>
+          <button class="win-btn" data-close-dialog="dialog-font">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Page Setup Dialog (Configurar Página) -->
+  <div class="dialog-overlay" id="dialog-pagesetup" style="display: none;">
+    <div class="dialog-box win-dialog" style="width: 440px;">
+      <div class="dialog-header">
+        <span class="dialog-title">Configurar Página</span>
+        <button class="dialog-close-btn" data-close-dialog="dialog-pagesetup">&times;</button>
+      </div>
+      <div class="dialog-body">
+        <fieldset class="win-fieldset">
+          <legend>Papel</legend>
+          <div class="form-row-compact">
+            <label>Tamanho:</label>
+            <select class="win-select" id="page-size-select">
+              <option value="a4" selected>A4 (210 x 297 mm)</option>
+              <option value="letter">Carta (Letter)</option>
+              <option value="legal">Ofício (Legal)</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset class="win-fieldset" style="margin-top: 10px;">
+          <legend>Orientação</legend>
+          <div style="display: flex; gap: 20px;">
+            <label class="win-radio"><input type="radio" name="orientation" value="portrait" checked> Retrato</label>
+            <label class="win-radio"><input type="radio" name="orientation" value="landscape"> Paisagem</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="win-fieldset" style="margin-top: 10px;">
+          <legend>Margens (milímetros)</legend>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div><label>Esquerda:</label> <input type="number" class="win-input" value="20" style="width: 70px;"></div>
+            <div><label>Direita:</label> <input type="number" class="win-input" value="20" style="width: 70px;"></div>
+            <div><label>Superior:</label> <input type="number" class="win-input" value="25" style="width: 70px;"></div>
+            <div><label>Inferior:</label> <input type="number" class="win-input" value="25" style="width: 70px;"></div>
+          </div>
+        </fieldset>
+
+        <div class="dialog-actions-horizontal" style="margin-top: 16px;">
+          <button class="win-btn primary-btn" data-close-dialog="dialog-pagesetup">OK</button>
+          <button class="win-btn" data-close-dialog="dialog-pagesetup">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. About Dialog (Sobre o Bloco de Notas) -->
+  <div class="dialog-overlay" id="dialog-about" style="display: none;">
+    <div class="dialog-box win-dialog about-dialog-box">
+      <div class="dialog-header">
+        <span class="dialog-title">Sobre o Bloco de Notas</span>
+        <button class="dialog-close-btn" data-close-dialog="dialog-about">&times;</button>
+      </div>
+      <div class="dialog-body about-body">
+        <div class="about-hero">
+          <img src="notepad_icon.png" alt="Notepad Icon" class="about-icon">
+          <div class="about-title-text">
+            <h2>Bloco de Notas</h2>
+            <span class="about-ver">Versão 10.0.26100.8875 (WinBuild.160101.0800)</span>
+          </div>
+        </div>
+        <hr class="win-divider">
+        <div class="about-content">
+          <p>Microsoft® Windows® Notepad Web/Desktop Clone</p>
+          <p>Engenharia reversa detalhada baseada em <code>C:\Windows\System32\notepad.exe</code></p>
+          <p>Binário x86-64 nativo descompilado e recursos MUI (pt-BR / en-US) extraídos com REA.</p>
+          <div class="about-license">
+            Todos os direitos reservados ao sistema operacional Microsoft® Windows®. Construído com tecnologia Web moderna e design Fluent UI para execução de alta fidelidade.
+          </div>
+        </div>
+        <div class="dialog-actions-horizontal">
+          <button class="win-btn primary-btn" data-close-dialog="dialog-about" style="min-width: 90px;">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Save Changes Confirmation Dialog -->
+  <div class="dialog-overlay" id="dialog-confirm-save" style="display: none;">
+    <div class="dialog-box win-dialog confirm-save-dialog">
+      <div class="dialog-header">
+        <span class="dialog-title">Bloco de Notas</span>
+        <button class="dialog-close-btn" id="confirm-save-cancel-btn">&times;</button>
+      </div>
+      <div class="dialog-body">
+        <p class="confirm-message" id="confirm-save-message">Deseja salvar as alterações em Sem título?</p>
+        <div class="dialog-actions-horizontal" style="margin-top: 24px; gap: 8px;">
+          <button class="win-btn primary-btn" id="confirm-save-save-btn">Salvar</button>
+          <button class="win-btn" id="confirm-save-dont-btn">Não Salvar</button>
+          <button class="win-btn" id="confirm-save-close-btn">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
