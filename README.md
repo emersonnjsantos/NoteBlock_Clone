@@ -4,9 +4,9 @@
 ### Engenharia Reversa & Recriação Fidedigna do Bloco de Notas do Windows
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20%7C%20Web-0078D4?style=for-the-badge&logo=windows)](https://github.com/emersonnjsantos/clone_bloco_notas)
-[![Architecture](https://img.shields.io/badge/Architecture-x86__64%20PE32%2B-informational?style=for-the-badge)](https://github.com/emersonnjsantos/clone_bloco_notas)
-[![UI Design](https://img.shields.io/badge/Design-Fluent%20WinUI-8A2BE2?style=for-the-badge)](https://github.com/emersonnjsantos/clone_bloco_notas)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20%7C%20Web-0078D4?style=for-the-badge&logo=windows)](https://github.com/emersonnjsantos/NoteBlock_Clone)
+[![Architecture](https://img.shields.io/badge/Architecture-x86__64%20PE32%2B-informational?style=for-the-badge)](https://github.com/emersonnjsantos/NoteBlock_Clone)
+[![UI Design](https://img.shields.io/badge/Design-Fluent%20WinUI-8A2BE2?style=for-the-badge)](https://github.com/emersonnjsantos/NoteBlock_Clone)
 
 <br/>
 
